@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 export default class News extends Component {
+  apikey = process.env.REACT_APP_NEWS_API;
   static defaultProps = {
     country: "Pk",
     size: 10,
@@ -31,8 +32,7 @@ export default class News extends Component {
     const options = {
       method: "GET",
       headers: {
-        // "x-api-key": "SFSG78-MkJhqh_pv5pgSB_aY5pVYHfuUxrXwRs6LXRM",
-        "x-api-key": "uePicno1aQ0UNmUATCthCGRTjTvGKPtFSzAoJpNeXhw",
+        "x-api-key": `${this.apikey}`,
       },
     };
     const url = `https://api.newscatcherapi.com/v2/latest_headlines?topic=${
@@ -58,8 +58,6 @@ export default class News extends Component {
   }
 
   render() {
-    console.log(this.state.articles);
-    console.log(this.state.loading);
     return (
       <>
         {this.state.loading ? (

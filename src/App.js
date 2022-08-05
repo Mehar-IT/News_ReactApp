@@ -7,6 +7,7 @@ import "./App.css";
 
 export default class App extends Component {
   size = 10;
+
   render() {
     return (
       <Router>
