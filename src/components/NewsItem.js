@@ -15,10 +15,7 @@ export default class NewsItem extends Component {
     return (
       <div className="my-3">
         <div className="card">
-          <span
-            className="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-info"
-            style={{ left: "85%", zIndex: "1" }}
-          >
+          <span className="position-absolute top-0 end-0 badge rounded-pill bg-info">
             <a
               href={`https://twitter.com/${this.firstLetterRemove(twitter)}`}
               target="_blank"
