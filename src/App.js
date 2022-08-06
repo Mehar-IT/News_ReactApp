@@ -7,6 +7,14 @@ import "./App.css";
 
 export default class App extends Component {
   size = 10;
+  // state = {
+  //   progress: 0,
+  // };
+  // setProgress = (progress) => {
+  //   this.setState({
+  //     progress: progress,
+  //   });
+  // };
 
   render() {
     return (

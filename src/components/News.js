@@ -4,6 +4,7 @@ import Spinner from "./Spinner";
 // import Data from "./Sample.json";
 import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroll-component";
+import LoadingBar from "react-top-loading-bar";
 
 export default class News extends Component {
   apikey = process.env.REACT_APP_NEWS_API;
@@ -25,10 +26,12 @@ export default class News extends Component {
       loading: true,
       page: 0,
       totalPages: 0,
+      progress: 0,
     };
   }
 
   data = async () => {
+    this.setState({ progress: 10 });
     const options = {
       method: "GET",
       headers: {
@@ -43,6 +46,7 @@ export default class News extends Component {
 
     let data = await fetch(url, options);
     let parsedData = await data.json();
+    this.setState({ progress: 50 });
 
     this.setState({
       articles: this.state.articles.concat(
@@ -51,6 +55,7 @@ export default class News extends Component {
       page: this.state.page + 1,
       loading: false,
       totalPages: parsedData.total_hits,
+      progress: 100,
     });
   };
   componentDidMount() {
@@ -60,6 +65,7 @@ export default class News extends Component {
   render() {
     return (
       <>
+        <LoadingBar color="#0D6EFD" height={3} progress={this.state.progress} />
         {this.state.loading ? (
           <Spinner height="100vh" />
         ) : (
@@ -67,7 +73,6 @@ export default class News extends Component {
             <h2 className="text-center">Monkey top headline</h2>
             <InfiniteScroll
               dataLength={this.state.articles.length}
-              // next={this.fetchMoreData}
               next={this.data}
               hasMore={this.state.articles.length !== this.state.totalPages}
               loader={<Spinner height="none" />}
